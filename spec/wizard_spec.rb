@@ -35,12 +35,38 @@ describe 'the greatest wizard bio of all time' do
     expect(book_faizaan).to have_css('a.button', text: 'Wizard me now')
   end
 
-  it 'has 7 social media sharing links'
-  it 'has an about section'
-  it 'has a link to download the wizards resume'
-  it 'has a testimonial by Harry Potter'
-  it "has a form field with the placeholder 'I no longer want to be a vegan'"
-  it 'has a section with the id of contact'
-  it "has an h1 tag with the content 'client testimonials'"
+  it 'has 7 social media sharing links' do
+    social_links = page.find('ul.social')
+    expect(social_links).to have_css('li', count: 7)
+  end
+
+  it 'has an about section' do
+    about_section = page.find('section#about')
+    expect(about_section).to have_content('About Me')
+  end
+
+  it 'has a link to download the wizards resume' do
+    resume_link = page.find('ul.nav')
+    expect(resume_link).to have_content('Resume')
+  end
+
+  it 'has a testimonial by Harry Potter' do
+    harry = page.find('ul.slides')
+    expect(harry).to have_content('Harry Potter')
+  end
+
+  it "has a form field with the placeholder 'I no longer want to be a vegan'" do
+    field = page.find('form#contactForm')
+    expect(field).to have_css("input[placeholder='I no longer want to be a vegan']")
+  end
+
+  it 'has a section with the id of contact' do
+    expect(page).to have_css('section#contact')
+  end
+
+
+  it "has an h1 tag with the content 'client testimonials'" do
+    expect(page).to have_css('h1', text: 'Client Testimonials')
+  end
 
 end
